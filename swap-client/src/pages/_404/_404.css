@@ -1,0 +1,37 @@
+.errorFrame{
+    width: 80%;
+    text-align: center;
+    font-family: 'Inter';
+    margin: auto;
+    padding: 0;
+
+}
+
+.errorFrame h1{
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.errorFrame img{
+    width: 40%;
+}
+
+@media screen and (max-width: 480px) {
+    .errorFrame{
+        width: 90%;
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        
+    }
+
+    .errorFrame h1{
+        font-size: 30px;
+    }
+
+    .errorFrame img{
+        width: 90%;
+    }
+    }

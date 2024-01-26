@@ -1,0 +1,114 @@
+.skeletonWrapper {
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: auto;
+  height: 300px;
+  margin-bottom: 40px;
+}
+
+.skeletonHeading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.skeletonText {
+  width: 200px;
+  height: 30px;
+  border-radius: 3px;
+  opacity: 0.7;
+  animation: skeletonLoading 1s linear infinite alternate;
+}
+
+.skeletonProduct {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.skeletonCard {
+  width: 17%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+
+  border-radius: 5px;
+  opacity: 0.7;
+
+  animation: skeletonDarkLoading 1s linear infinite alternate;
+}
+
+.skeletonImage {
+  width: 100%;
+  height: 80%;
+  opacity: 0.7;
+
+  animation: skeletonLoading 1s linear infinite alternate;
+}
+
+.skeletonDetails {
+  width: 100%;
+  height: 20%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.skeletonDetailsText {
+  width: 30%;
+  height: 70%;
+  opacity: 0.7;
+
+  animation: skeletonLoading 1s linear infinite alternate;
+}
+
+@keyframes skeletonLoading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
+@keyframes skeletonDarkLoading {
+  0% {
+    background-color: hsl(200, 20%, 72%);
+  }
+
+  100% {
+    background-color: hsl(199, 11%, 97%);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .skeletonProduct {
+    flex-direction: column;
+  }
+
+  .skeletonCard {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 20px;
+  }
+
+  .skeletonText {
+    height: 20px;
+  }
+
+  .skeletonWrapper {
+    height: auto;
+  }
+}

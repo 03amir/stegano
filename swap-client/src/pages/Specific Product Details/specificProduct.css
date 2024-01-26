@@ -1,0 +1,162 @@
+.specificFrame {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 100px;
+  color: black;
+  position: relative;
+  margin-bottom: 60px;
+  min-height: 300px;
+  gap: 90px;
+}
+
+
+.specificFrame h2,
+.specificFrame h3,
+.specificFrame h4,
+.specificFrame p {
+  margin: 0;
+  padding: 0;
+}
+
+.imageDiv {
+  width: 35%;
+  height: 97%;
+}
+
+.imageDiv img {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  object-fit: contain;
+}
+
+.detailsDiv {
+  max-width: 55%;
+  word-wrap: break-word;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.detailsDiv p,
+.detailsDiv .small {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.deleteBtn{
+  padding: 10px 30px;
+  border: none;
+  outline: none;
+  background-color: #b3b3b3;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.priceHeading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 40px;
+
+}
+
+.priceHeading h2 {
+  font-size: 40px;
+}
+
+.priceHeading button {
+  padding: 8px 20px;
+  background-color: #252423;
+  border-radius: 4px;
+  color: white;
+  font-family: "Inter", sans-serif;
+  outline: none;
+  border: none;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.contactSeller {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.box {
+  cursor: pointer;
+  color: black;
+  font-size: 20px;
+}
+
+.needLoginText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color:black;
+  font-weight: 900;
+  font-size: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+@media screen and (max-width: 480px) {
+  .specificFrame {
+    width: 90%;
+    flex-direction: column;
+    margin-top: 50px;
+    height: auto;
+    gap: 15px;
+
+  }
+
+  .imageDiv {
+    width: 90%;
+    height: 33vh;
+
+  }
+
+  .detailsDiv {
+    max-width: 90%;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .priceHeading h2 {
+    font-size: 20px;
+
+  }
+
+  .priceHeading {
+    gap: 10px;
+    flex-direction: column;
+
+    align-items: start;
+
+
+  }
+
+  .contactSeller {
+    width: 98%;
+
+  }
+
+  .imageDiv img {
+    object-fit: fill;
+  }
+
+
+
+}

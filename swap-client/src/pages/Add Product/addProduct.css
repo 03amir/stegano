@@ -1,0 +1,183 @@
+.addDetailsFrame {
+  width: 70%;
+  height: 95vh;
+  margin: auto;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.addDetailsBox {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.inputBoxes {
+  width: 70%;
+  height: 90%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.inputBoxes input {
+  width: 90%;
+  padding: 9px 15px;
+  border: 1px solid black;
+  border-radius: 4px;
+  outline: none;
+  font-family: "Inter", sans-serif;
+  background-color: #eeeeee;
+  color: black;
+}
+
+.inputBoxes select {
+  width: 94%;
+  padding: 9px 15px;
+  border: 1px solid black;
+  border-radius: 4px;
+  outline: none;
+  font-family: "Inter", sans-serif;
+  background-color: #eeeeee;
+  color: black;
+}
+
+.imageBox {
+  width: 30%;
+  height: 86%;
+  border: 1px dotted black;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.uploadButton {
+  width: 100%;
+  height: 15%;
+  /* display: inline-block; */
+  /* background-color: red; */
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.imageBox img {
+  width: 100%;
+  height: 80%;
+  margin-top: 20px;
+}
+
+.descBox {
+  width: 100%;
+  height: 35%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-direction: column;
+  gap: 5px;
+}
+
+textarea {
+  width: 96.9%;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 15px;
+  outline: none;
+  font-family: "Inter", sans-serif;
+  background-color: #eeeeee;
+  color: black;
+  resize: vertical;
+}
+
+.descBox button {
+  width: 100%;
+  padding: 12px 0px;
+  background-color: #4c8a7f;
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+
+.descBox button:hover {
+  background-color: #3f6745;
+}
+
+button[disabled] {
+  cursor: progress;
+  background-color: black;
+  color: white;
+}
+
+button[disabled]:hover {
+  cursor: progress;
+  background-color: black;
+  color: white;
+}
+
+.uploading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  font-family: "Inter";
+  font-weight: 800;
+  font-size: 40px;
+  color: #3f6745;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+@media screen and (max-width: 480px) {
+  .inputBoxes select {
+    width: 101%;
+  }
+
+  .addDetailsFrame {
+    width: 80%;
+    padding: 40px 10px;
+    height: auto;
+  }
+
+  .addDetailsBox {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .inputBoxes {
+    width: 95%;
+    gap: 10px;
+  }
+
+  .imageBox {
+    width: 82%;
+  }
+
+  .descBox {
+    margin-top: 20px;
+    gap: 15px;
+  }
+
+  textarea {
+    width: 89.5%;
+  }
+
+  .uploading {
+    font-size: 25px;
+  }
+}

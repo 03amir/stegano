@@ -1,0 +1,155 @@
+.homeWrapper {
+    width: 100%;
+}
+
+.logoColor {
+    color: #3F6745;
+    font-weight: 900;
+}
+
+.hero {
+    width: 67%;
+    margin: auto;
+    margin-top: 110px;
+    margin-bottom: 190px;
+}
+
+.hero h1 {
+    font-size: 80px;
+    font-weight: 900;
+    align-items: center;
+    text-align: center;
+    /* border: 2px solid red; */
+}
+
+.typeText {
+    color: #3F6745;
+}
+
+.subHeading {
+    width: 100%;
+    text-align: center;
+}
+
+.subHeading p {
+    font-size: 35px;
+    font-weight: 700;
+    color: #636363;
+    line-height: 0.5;
+}
+
+.heroButtons {
+    margin: auto;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.heroButtons button {
+    padding: 13px 45px;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin-left: 30px;
+    margin-top: 25px;
+
+}
+
+.sellButton {
+    background-color: #B1510B;
+}
+
+.sellButton:hover {
+    background-color: #A56232;
+}
+
+.buyButton {
+    background-color: gray;
+}
+
+.buyButton:hover {
+    background-color: #D9D9D9;
+}
+
+.downArrow {
+    font-size: 30px;
+    color: black;
+    margin: auto;
+    width: 100%;
+    margin-top: 70px;
+    margin-left: 15px;
+
+    -webkit-animation: slide-bottom 1s linear 0.5s infinite alternate both;
+    animation: slide-bottom 1s linear 0.5s infinite alternate both;
+
+}
+
+
+@-webkit-keyframes slide-bottom {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        -webkit-transform: translateY(100px);
+        transform: translateY(100px);
+    }
+}
+
+@keyframes slide-bottom {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        -webkit-transform: translateY(100px);
+        transform: translateY(100px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero {
+        width: 88%;
+        margin-top: 43px;
+
+    }
+
+    .hero h1 {
+        font-size: 64px;
+
+    }
+
+    .subHeading p {
+        font-size: 18px;
+        text-align: start;
+        line-height: normal;
+    }
+
+    .heroButtons {
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .downArrow {
+
+        width: 90%;
+    }
+
+    .heroButtons button {
+
+        margin-left: 0px;
+
+
+    }
+
+
+
+}

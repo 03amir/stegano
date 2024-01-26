@@ -1,0 +1,84 @@
+.profileProducts{
+    width: 100%;
+}
+
+.profileFrame{
+    width: 100%;
+    min-height: 60vh;
+     margin-top: 50px;
+}
+
+.userDetailsBox{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    gap:30px;
+    /* border:3px solid red; */
+}
+
+.userDetailsBox img{
+    height: 100%;
+   object-fit: contain;
+   border-radius: 50%;
+}
+
+.productHeader{
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.addBtn{
+    padding: 8px 12px;
+    background-color: #3f6745;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 3px;
+    margin-left: 10px;
+
+}
+
+
+.lowerBox{
+    width: 60%;
+    margin: auto;
+}
+
+
+.notLoggedIn{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+@media screen and (max-width: 480px) {
+.userDetailsBox{
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 5px;
+    font-size: 12px;
+    width: 70%;
+    margin-top: 50px;
+}
+.lowerBox{
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.noProduct{
+    margin: 0;
+    padding:0;
+}
+
+.profileFrame{
+    gap: 20px; 
+}
+
+}

@@ -1,0 +1,128 @@
+.allCategoryFrame {
+  width: 80%;
+  margin: auto;
+  margin-top: 100px;
+  position: relative;
+  gap: 50px;
+  display: grid;
+  grid-template-columns: 17% 17% 17% 17% 17%;
+  min-height: 300px;
+}
+
+.filtersSort {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 10px 30px;
+  margin: auto;
+}
+
+.filters {
+  width: 40%;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #3f6745;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+.showButton,
+.clearButton {
+  padding: 10px 20px;
+  background-color: #3f6745;
+  color: white;
+  font-family: "Inter";
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  border-radius: 2px;
+  border: none;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+.clearButton {
+  background-color: gray;
+  color: black;
+}
+
+.loader {
+  position: absolute;
+  top: 45%;
+  display: inline-block;
+  left: 45%;
+  transform:translateX(-50%);
+  
+}
+
+.nodata {
+  margin-left: 40px;
+}
+
+@media screen and (max-width: 480px) {
+  .allCategoryFrame {
+    grid-template-columns: none;
+  }
+  .filtersSort {
+    width: 80%;
+    margin-top: 20px;
+    flex-direction: column;
+  }
+  .filters {
+    width: 85%;
+  }
+
+}
