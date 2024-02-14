@@ -154,23 +154,22 @@ exports.getUserProducts = async (req,res)=>{
   res.json(products);
 }
 
+
 exports.deleteProduct = async (req, res) => {
+
   const productId = req.params.productId;
+
   try {
-   
-    const deletedProduct = await Product.findOneAndRemove({ _id: productId });
+
+    const deletedProduct = await Product.findOneAndDelete({ _id: productId });
 
     if (deletedProduct) {
-      return res.status(200).json({ 
-         name:deletedProduct.title
-        ,message: 'Product deleted successfully' });
+      return res.status(200).json({ message: 'Product deleted successfully' });
     } else {
       return res.status(404).json({ message: 'Product not found' });
     }
   } catch (error) {
+    console.error('Error deleting product:', error);
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
-
-
-

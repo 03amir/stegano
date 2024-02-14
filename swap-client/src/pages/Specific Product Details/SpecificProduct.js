@@ -51,6 +51,7 @@ function SpecificProduct(props) {
   async function deleteProduct() {
 
     try {
+
       const res = await axios.delete(
 
         `${process.env.REACT_APP_BASE_URL}/deleteProduct/${id}`,{
@@ -61,7 +62,7 @@ function SpecificProduct(props) {
         }
       );
 
-      alert(`product ${res.name} is succefully deleted`);
+      alert(`product  is succefully deleted`);
       navigate("/profile");
       
     } catch (error) {

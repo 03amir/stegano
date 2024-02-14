@@ -58,13 +58,13 @@ export default function Profile() {
           {loading ? (
             <CircularProgress className="loader" size="60px" color="success" />
           ) : (
+            
             <div className="lowerBox">
             <div className="productHeader" >
                   <h2 className="products-heading">Your Products:</h2>
                   <button className="addBtn" onClick={() => { navigate("/products/addproduct")}}>Add Product</button>
             </div>
 
-             
               {userProduct.length === 0 && (
                 <h1 className="noProduct">
                   You have no product listed
@@ -78,6 +78,8 @@ export default function Profile() {
                     return <ProductCard key={index} item={product} />;
                   })}
               </div>
+
+              
             </div>
           )}
         </>

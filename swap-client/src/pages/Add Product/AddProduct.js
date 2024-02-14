@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./addProduct.css";
-import FileBase from "react-file-base64";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contex/UserContext";
@@ -19,9 +18,17 @@ function AddProduct(props) {
     brand: "",
     price: "",
     author: "",
-    productImage: "",
+    imageUrl:"",
     condition: "",
   });
+
+  const [image , setimage] = useState();
+  
+  console.log(process.env.REACT_APP_CLOUD_PRESET);
+  console.log(process.env.REACT_APP_CLOUD_NAME);
+  console.log(process.env.REACT_APP_CLOUD_URL);
+
+  
 
   useEffect(() => {
     if (!user) {
@@ -29,6 +36,47 @@ function AddProduct(props) {
     }
   }, [user]);
 
+  async function uploadImage() {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", process.env.REACT_APP_CLOUD_PRESET);
+    data.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
+
+    const res = await fetch(process.env.REACT_APP_CLOUD_URL, {
+      method: "post",
+      body: data
+    });
+
+    const dataa = await res.json();
+    setFormDetails({
+      ...formDetails,
+      imageUrl: dataa.secure_url
+    });
+  }
+
+
+  const handleImageChange = (event) => {
+
+
+    const file = event.target.files[0];
+
+    if (file) {
+    
+        if (file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png') {
+          setimage(file);
+        } 
+        else {
+          alert('Please select a valid image format (jpg, jpeg, or png).');
+        }
+
+      }
+      else {
+        alert('Please select an image file.');
+      }
+    
+
+  }
+  
 
   const [isUploading, setIsUploading] = useState(false);
 
@@ -36,7 +84,7 @@ function AddProduct(props) {
 
     e.preventDefault();
 
-    if (!formDetails.productImage) {
+    if (!formDetails.imageUrl) {
       alert("Please Upload A picture of the Product");
     } else {
 
@@ -46,7 +94,7 @@ function AddProduct(props) {
       let intCondition = parseInt(formDetails.condition);
 
       const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/allproducts`, {
-        productImage: formDetails.productImage,
+        productImage: formDetails.imageUrl,
         price: intPrice,
         title: formDetails.title,
         condition: intCondition,
@@ -180,22 +228,13 @@ function AddProduct(props) {
             </div>
 
             <div className="imageBox">
-              <label htmlFor="imagebutton" className="uploadButton">
-                Upload Image
-                <FileBase
-                  id="imagebutton"
-                  name="image"
-                  type="file"
-                  multiple={false}
-                  onDone={(data) => {
-                    setFormDetails({ ...formDetails, productImage: data.base64 });
-                  }}
-                />
-              </label>
+             
+              <input type="file" onChange={(e) => { handleImageChange(e) }} />
+              <div className="upload_button" onClick={uploadImage}>Upload image</div>
 
 
-              {formDetails.productImage ? (
-                <img src={formDetails.productImage} alt="User Uploaded" />
+              {formDetails.imageUrl ? (
+                <img src={formDetails.imageUrl} alt="User Uploaded" />
               ) : (
                 <></>
               )}

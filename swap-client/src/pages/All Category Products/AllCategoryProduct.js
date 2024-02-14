@@ -61,6 +61,8 @@ function AllCategoryProduct(props) {
   },[filterUrl]);
 
   function addQueryParam(){
+
+    
     let url = new URLSearchParams('')
     url.set('category',tag)
     url.set('price[lte]',priceRange[1])
