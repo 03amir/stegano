@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
     userImage:{
         type:String,
     },
+    
     mobile:{
         type:String,
     },

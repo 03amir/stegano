@@ -13,11 +13,7 @@ async function verify(req, res, next) {
     
   }
 
-  const tokenJwt = authorization.replace("Bearer ", "");
-
-    //const tokenJwt = req.headers.authorization.split(" ")[1];
-
-    //console.log(req.headers.authorization)
+  const tokenJwt = authorization.slice(7);
 
     const googleJwt = jwt_decode(tokenJwt)?.sub;
 

@@ -15,7 +15,7 @@ function Navbar() {
   const screenSize = window.innerWidth;
 
   async function signInHandlr(credential) {
-    
+
     const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/signin`, {
       userDetails: credential,
     });
@@ -25,7 +25,7 @@ function Navbar() {
     localStorage.setItem("userSwap", JSON.stringify(res.data.data));
 
     signIn(res.data.data);
-
+    
   }
 
   function logOutHandlr() {

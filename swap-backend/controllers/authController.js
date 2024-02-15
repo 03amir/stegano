@@ -13,8 +13,6 @@ exports.addUser = async (req, res, next) => {
 
     const userPresent = await User.find({ email: email });
 
-    // console.log(userPresent);
-
     if (userPresent.length > 0) {
       // login
       res
@@ -22,7 +20,6 @@ exports.addUser = async (req, res, next) => {
         .json({ success: true, data: userPresent[0], token: userDetails });
     } else {
 
-      
       // sign up
       const newUser = new User({
         name: decodedUser.name,

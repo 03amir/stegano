@@ -1,5 +1,5 @@
 const express = require("express");
-const verify = require("../middlewares/verify")
+const verify = require("../middlewares/verify");
 
 const { getAllProducts , getCategoryProduct , getProductDetails, addProduct, deleteAll, getUserProducts , deleteProduct} = require("../controllers/productController");
 
