@@ -5,12 +5,14 @@ import "./App.css";
 import SpecificProduct from "./pages/Specific Product Details/SpecificProduct";
 import AllCategoryProduct from "./pages/All Category Products/AllCategoryProduct";
 import AddProduct from "./pages/Add Product/AddProduct";
-import {  UserProvider } from "./contex/UserContext";
+// import {  UserProvider } from "./contex/UserContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import _404 from "./pages/_404/_404";
 import Footer from "./components/Footer/Footer";
 import Profile from "./pages/Profile/Profile";
 import Contact from "./pages/Contact/Contact";
+import { Provider } from "react-redux";
+import store from './redux/store.js'
 
 function App() {
 
@@ -21,7 +23,8 @@ function App() {
 
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
 
-      <UserProvider>
+      {/* <UserProvider> */}
+      <Provider store = {store}>
         <BrowserRouter>
           <Navbar />
 
@@ -38,7 +41,8 @@ function App() {
           </Routes>
           <Footer/>
         </BrowserRouter>
-      </UserProvider>
+      </Provider>
+      {/* </UserProvider> */}
       </GoogleOAuthProvider>
   );
 }

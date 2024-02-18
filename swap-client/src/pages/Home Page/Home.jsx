@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useTypewriter } from "react-simple-typewriter";
 import "./home.css";
+import {  useSelector } from 'react-redux';
+
 import { HiOutlineChevronDoubleDown } from "react-icons/hi";
 import HomeProductBox from "../../components/Home product Box/HomeProductBox";
-import { UserContext } from "../../contex/UserContext";
 import { useNavigate } from "react-router-dom";
 
 function Home(props) {
@@ -15,7 +16,7 @@ function Home(props) {
     loop: 0,
   });
 
-  const { user } = useContext(UserContext);
+  const user = useSelector((state) => state.user.data);
 
   return (
     <div className="homeWrapper">

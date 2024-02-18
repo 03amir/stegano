@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../contex/UserContext";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../../components/Product Card/ProductCard";
 import './profile.css';
+import { useSelector } from 'react-redux';
+
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
 
-  const { user } = useContext(UserContext);
-
+  const user = useSelector((state) => state.user.data);
   const [userProduct, setUserProduct] = useState([]);
   const [loading,SetLoading] = useState(false);
 

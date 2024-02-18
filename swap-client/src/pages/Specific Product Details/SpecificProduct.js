@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./specificProduct.css";
 import ProductCard from "../../components/Product Card/ProductCard";
-import { UserContext } from "../../contex/UserContext";
+import { useSelector } from 'react-redux';
 import CircularProgress from "@mui/material/CircularProgress";
 
 function SpecificProduct(props) {
@@ -16,7 +16,7 @@ function SpecificProduct(props) {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const { user } = useContext(UserContext);
+  const user = useSelector((state) => state.user.data);
 
   const navigate = useNavigate();
 

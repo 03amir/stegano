@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./addProduct.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../contex/UserContext";
+import { useSelector } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 
 function AddProduct(props) {
 
   const navigate = useNavigate();
 
-  const { user } = useContext(UserContext)
+  const user = useSelector((state) => state.user.data);
 
   const [formDetails, setFormDetails] = useState({
     title: "",
@@ -24,12 +24,6 @@ function AddProduct(props) {
 
   const [image , setimage] = useState();
   
-  console.log(process.env.REACT_APP_CLOUD_PRESET);
-  console.log(process.env.REACT_APP_CLOUD_NAME);
-  console.log(process.env.REACT_APP_CLOUD_URL);
-
-  
-
   useEffect(() => {
     if (!user) {
       navigate("/")

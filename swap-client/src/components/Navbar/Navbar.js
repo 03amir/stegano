@@ -1,44 +1,41 @@
+import "./navbar.css"; 
 import React from "react";
-import "./navbar.css";
-import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from "../../contex/UserContext";
-import { useContext } from "react";
+import { useSelector , useDispatch } from 'react-redux';
 import { GoogleLogin } from "@react-oauth/google";
+import { Link, useNavigate } from "react-router-dom";
+import { signIn, logOut } from "../../redux/userSlice";
 
 function Navbar() {
 
-  const { user, signIn, logOut } = useContext(UserContext);
+  const user = useSelector((state) => state.user.data); 
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const screenSize = window.innerWidth;
 
-  async function signInHandlr(credential) {
-
+  async function signInHandler(credential) {
+   
     const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/signin`, {
       userDetails: credential,
     });
 
     localStorage.setItem("jwtSwap", res.data.token);
-
     localStorage.setItem("userSwap", JSON.stringify(res.data.data));
 
-    signIn(res.data.data);
-    
+    dispatch(signIn(res.data.data)); // Dispatching the correct action
   }
 
-  function logOutHandlr() {
+  function logOutHandler() {
     localStorage.clear();
-    logOut();
+    dispatch(logOut()); // Dispatching the correct action
   }
 
-  function sendToProfile(){
+  function sendToProfile() {
     navigate("/profile");
   }
 
   return (
-
     <div className="nav">
       <Link className="link" to="/">
         <h2 className="logo">Swap</h2>
@@ -47,8 +44,10 @@ function Navbar() {
       <div className={screenSize <= 450 ? "centerProfile" : "profile"}>
         {user ? (
           <>
-            <button className="profileBtn" onClick={sendToProfile}>Profile</button>
-            <button className="logOutBtn" onClick={logOutHandlr}>
+            <button className="profileBtn" onClick={sendToProfile}>
+              Profile
+            </button>
+            <button className="logOutBtn" onClick={logOutHandler}>
               Log Out
             </button>
           </>
@@ -58,7 +57,7 @@ function Navbar() {
               type={screenSize <= 450 ? "icon" : ""}
               size={screenSize <= 450 ? "medium" : ""}
               onSuccess={(credentialResponse) => {
-                signInHandlr(credentialResponse.credential);
+                signInHandler(credentialResponse.credential);
               }}
               onError={() => {
                 console.log("Login Failed");
@@ -67,9 +66,7 @@ function Navbar() {
           </>
         )}
       </div>
-      
     </div>
-
   );
 }
 
