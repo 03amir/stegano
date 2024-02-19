@@ -1,11 +1,10 @@
+import "./App.css";
 import { BrowserRouter, Route, Routes} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home Page/Home.jsx";
-import "./App.css";
 import SpecificProduct from "./pages/Specific Product Details/SpecificProduct";
 import AllCategoryProduct from "./pages/All Category Products/AllCategoryProduct";
 import AddProduct from "./pages/Add Product/AddProduct";
-// import {  UserProvider } from "./contex/UserContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import _404 from "./pages/_404/_404";
 import Footer from "./components/Footer/Footer";
@@ -19,13 +18,10 @@ function App() {
 
   return (
 
-
-
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-
-      {/* <UserProvider> */}
       <Provider store = {store}>
         <BrowserRouter>
+
           <Navbar />
 
           <Routes>
@@ -40,9 +36,9 @@ function App() {
 
           </Routes>
           <Footer/>
+
         </BrowserRouter>
       </Provider>
-      {/* </UserProvider> */}
       </GoogleOAuthProvider>
   );
 }

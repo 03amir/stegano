@@ -2,7 +2,6 @@ import React from "react";
 import { useTypewriter } from "react-simple-typewriter";
 import "./home.css";
 import {  useSelector } from 'react-redux';
-
 import { HiOutlineChevronDoubleDown } from "react-icons/hi";
 import HomeProductBox from "../../components/Home product Box/HomeProductBox";
 import { useNavigate } from "react-router-dom";

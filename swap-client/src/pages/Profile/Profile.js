@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import ProductCard from "../../components/Product Card/ProductCard";
 import './profile.css';
+import axios from "axios";
 import { useSelector } from 'react-redux';
-
-import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import ProductCard from "../../components/Product Card/ProductCard";
 
 export default function Profile() {
 
@@ -20,6 +19,7 @@ export default function Profile() {
     SetLoading(true);
     
     try {
+
       const res = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/userProducts`,
         {
@@ -28,12 +28,16 @@ export default function Profile() {
           },
         }
       );
-      console.log(res.data)
+
       setUserProduct(res.data);
-    } catch (error) {
+      
+    } 
+    catch (error) {
       console.error("Error fetching user products:", error);
     }
+
     SetLoading(false);
+
   }
 
 
