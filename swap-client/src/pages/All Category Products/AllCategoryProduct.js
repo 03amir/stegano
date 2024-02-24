@@ -55,13 +55,16 @@ function AllCategoryProduct(props) {
     });
 
     if (selectedSort) {
-      filtered = filtered.sort((a, b) => {
-        if (a[selectedSort] < b[selectedSort]) return -1;
-        if (a[selectedSort] > b[selectedSort]) return 1;
-        return 0;
-      });
+      let sortType = selectedSort.startsWith("-") ? selectedSort.slice(1) : selectedSort;
+      let multiply = selectedSort.startsWith("-") ? -1 : 1;
 
+      filtered = filtered.sort((a, b) => {
+        if (a[sortType] > b[sortType]) return 1 * multiply; // Change -1 to 1
+        else if (a[sortType] < b[sortType]) return -1 * multiply; // Change 1 to -1
+        else return 0;
+      });
     }
+
 
     setFilteredProducts(filtered);
   };
