@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./specificProduct.css";
@@ -27,12 +27,14 @@ function SpecificProduct(props) {
       `${process.env.REACT_APP_BASE_URL}/product/${id}`,
       {
         headers: {
-          Authorization: "Bearer" + localStorage.getItem("jwtSwap"),
+          Authorization: "Bearer " + localStorage.getItem("jwtSwap"),
         },
       }
     );
 
-    setDetails(res.data.data[0]);
+    setDetails(res.data.data);
+
+    console.log(res.data)
 
     setIsLoading(false);
   }
@@ -56,7 +58,7 @@ function SpecificProduct(props) {
 
         `${process.env.REACT_APP_BASE_URL}/deleteProduct/${id}`,{
          headers: {
-            Authorization : 'Bearer' + localStorage.getItem("jwtSwap")
+            Authorization : 'Bearer ' + localStorage.getItem("jwtSwap")
           },
           
         }
@@ -88,7 +90,7 @@ function SpecificProduct(props) {
               <>
                 {" "}
                 <div className="imageDiv">
-                  <img src={details.productImage} alt="ProductImage" />
+                  <img src={details?.productImage} alt="ProductImage" />
                 </div>
                 <div className="detailsDiv">
                   <div className="priceHeading">

@@ -15,7 +15,7 @@ function Home(props) {
     loop: 0,
   });
 
-  const user = useSelector((state) => state.user.data);
+  const user = useSelector((state) => state.user.isAuth);
 
   return (
     <div className="homeWrapper">

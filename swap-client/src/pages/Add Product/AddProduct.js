@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
-import "./addProduct.css";
+
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
+import "./addProduct.css";
 
-function AddProduct(props) {
-
+function AddProduct() {
+  
   const navigate = useNavigate();
-
-  const user = useSelector((state) => state.user.data);
 
   const [formDetails, setFormDetails] = useState({
     title: "",
@@ -18,112 +16,62 @@ function AddProduct(props) {
     brand: "",
     price: "",
     author: "",
-    imageUrl:"",
     condition: "",
   });
 
-  const [image , setimage] = useState();
-  
-  useEffect(() => {
-    if (!user) {
-      navigate("/")
-    }
-  }, [user]);
-
-  async function uploadImage() {
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", process.env.REACT_APP_CLOUD_PRESET);
-    data.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
-
-    const res = await fetch(process.env.REACT_APP_CLOUD_URL, {
-      method: "post",
-      body: data
-    });
-
-    const dataa = await res.json();
-    setFormDetails({
-      ...formDetails,
-      imageUrl: dataa.secure_url
-    });
-  }
-
-
-  const handleImageChange = (event) => {
-
-
-    const file = event.target.files[0];
-
-    if (file) {
-    
-        if (file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png') {
-          setimage(file);
-        } 
-        else {
-          alert('Please select a valid image format (jpg, jpeg, or png).');
-        }
-
-      }
-      else {
-        alert('Please select an image file.');
-      }
-    
-
-  }
-  
-
+  const [image, setImage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
-  async function submitHandlr(e) {
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      if (file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png") {
+        setImage(file);
+      } else {
+        alert("Please select a valid image format (jpg, jpeg, or png).");
+      }
+    } else {
+      alert("Please select an image file.");
+    }
+  };
 
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formDetails.imageUrl) {
-      alert("Please Upload A picture of the Product");
-    } else {
+    if (!image) {
+      alert("Please select an image file.");
+      return;
+    }
 
-      setIsUploading(true);
+    setIsUploading(true);
 
-      let intPrice = parseInt(formDetails.price);
-      let intCondition = parseInt(formDetails.condition);
+    try {
+      const formData = new FormData();
 
-      const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/allproducts`, {
-        productImage: formDetails.imageUrl,
-        price: intPrice,
-        title: formDetails.title,
-        condition: intCondition,
-        author: formDetails.author,
-        description: formDetails.description,
-        tag: formDetails.tag,
-        brand: formDetails.brand,
-      }, 
-      {
-        headers: {
-          Authorization: "Bearer" + localStorage.getItem("jwtSwap"),
-        }
-      }).catch (function (error) {
-        console.log(error)
-
+      formData.append("file", image);
+      Object.entries(formDetails).forEach(([key, value]) => {
+        formData.append(key, value);
       });
 
-      alert("Product added succes fullly go to home page");
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/addProduct`, formData, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("jwtSwap"),
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-      setIsUploading(false);
-
+      alert("Product added successfully. Go to the home page.");
       navigate("/");
-      
+    } catch (error) {
+      console.error("Error adding product:", error);
+    } finally {
+      setIsUploading(false);
     }
-  }
+  };
 
   return (
-    <>
-    {
-        user && <form
-          id="addProduct"
-          className={"addDetailsFrame"}
-          onSubmit={(e) => {
-            submitHandlr(e);
-          }}
+    <div className="addProductContainer">
+      <form id="addProduct" className="addProductForm" onSubmit={handleSubmit}  
         >
           <div className="addDetailsBox">
             <div className="inputBoxes">
@@ -141,7 +89,6 @@ function AddProduct(props) {
               />
 
               <label htmlFor="tags">Category</label>
-
               <select
                 required
                 name="tags"
@@ -222,16 +169,8 @@ function AddProduct(props) {
             </div>
 
             <div className="imageBox">
-             
-              <input type="file" onChange={(e) => { handleImageChange(e) }} />
-              <div className="upload_button" onClick={uploadImage}>Upload image</div>
-
-
-              {formDetails.imageUrl ? (
-                <img src={formDetails.imageUrl} alt="User Uploaded" />
-              ) : (
-                <></>
-              )}
+              <label htmlFor="file">Upload Image</label>
+              <input type="file" id="file" onChange={(e) => handleImageChange(e)} />
             </div>
           </div>
 
@@ -257,19 +196,16 @@ function AddProduct(props) {
           </div>
 
 
-          {
-            isUploading && <div className="uploading">
-              <CircularProgress size="60px" color="success" /> <span>Uploading...</span>
-            </div>
-          }
+      </form>
 
-
-        </form>
-    }
-    
-
-    </>
+      {isUploading && (
+        <div className="uploading">
+          <CircularProgress size="60px" color="success" /> <span>Uploading...</span>
+        </div>
+      )}
+    </div>
   );
 }
 
 export default AddProduct;
+

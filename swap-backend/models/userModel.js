@@ -9,17 +9,10 @@ const userSchema = new mongoose.Schema({
     email:{
         type:String,
         required:true,
-        unique:false
     },
-    googleSub:{
-        type:String,
-        required:true
-    }
-    ,
     userImage:{
         type:String,
     },
-    
     mobile:{
         type:String,
     },

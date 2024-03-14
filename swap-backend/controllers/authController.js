@@ -1,17 +1,23 @@
 const User = require("../models/userModel");
-const jwt = require("jsonwebtoken");
-const jwt_decode = require("jwt-decode");
+const { OAuth2Client } = require('google-auth-library');
 
-exports.addUser = async (req, res, next) => {
+const client = new OAuth2Client(process.env.CLIENT_ID);
+
+exports.addUser = async (req, res) => {
   try {
-    
+
     const { userDetails } = req.body;
 
-    const decodedUser = jwt_decode(userDetails);
+      const ticket = await client.verifyIdToken({
+        idToken: userDetails,
+        audience: process.env.CLIENT_ID,
+      });
 
-    const email = decodedUser.email;
+    const payload = ticket.getPayload();
 
-    const userPresent = await User.find({ email: email });
+    const userEmail = payload.email;
+
+    const userPresent = await User.find({ email: userEmail });
 
     if (userPresent.length > 0) {
       // login
@@ -22,10 +28,9 @@ exports.addUser = async (req, res, next) => {
 
       // sign up
       const newUser = new User({
-        name: decodedUser.name,
-        email: decodedUser.email,
-        userImage: decodedUser.picture,
-        googleSub: decodedUser.sub,
+        name: payload.name,
+        email: payload.email,
+        userImage: payload.picture,
       });
 
       const signedUpUser = await newUser.save();
@@ -41,20 +46,79 @@ exports.addUser = async (req, res, next) => {
     res.json({
       success: false,
       data: error,
-      user:jwt_decode(req.body.userDetails)
     });
   }
 };
 
-exports.allUser = async (req, res) => {
-  const allUser = await User.find({});
-  res.status(200).json({
-    success: true,
-    data: allUser,
-  });
+exports.updateUser = async (req, res) => {
+
+  const logedUser = req.user;
+
+  const { name, mobile, collegeName } = req.body;
+
+  try {
+ 
+
+    const user = await User.findOne({email:logedUser.email});
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    user.name = name || user.name;
+    user.mobile = mobile || user.mobile;
+    user.collegeName = collegeName || user.collegeName;
+
+    const updatedUser = await user.save();
+
+    res.status(200).json({ success: true, data: updatedUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
 };
 
-exports.deletealluser = async (req, res) => {
-  const deletedall = await User.deleteMany({});
-  res.send(deletedall);
+exports.checkAuth = async (req, res) => {
+
+  try {
+
+    const { authorization } = req.headers;
+
+    if (!authorization) {
+      return res.status(401).json({
+        success: false,
+        message: 'Authorization header missing',
+      });
+    }
+
+    const userToken = authorization.slice(7);
+
+    const ticket = await client.verifyIdToken({
+      idToken: userToken,
+      audience: process.env.CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+
+    const userdata = await User.findOne({ email: payload.email });
+   
+
+    if (userdata) {
+      return res.status(200).json({
+        success: true,
+        user: userdata
+      });
+    } else {
+      return res.status(401).json({
+        success: false,
+        message: 'User not found',
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      success: false,
+      message: 'Internal server error',
+    });
+  }
 };

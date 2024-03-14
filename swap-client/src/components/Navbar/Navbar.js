@@ -8,7 +8,7 @@ import { signIn, logOut } from "../../redux/userSlice";
 
 function Navbar() {
 
-  const user = useSelector((state) => state.user.data); 
+  const user = useSelector((state) => state.user.isAuth); 
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,12 +23,13 @@ function Navbar() {
     localStorage.setItem("jwtSwap", res.data.token);
     localStorage.setItem("userSwap", JSON.stringify(res.data.data));
 
-    dispatch(signIn(res.data.data)); // Dispatching the correct action
+    dispatch(signIn(res.data.data)); 
+    
   }
 
   function logOutHandler() {
     localStorage.clear();
-    dispatch(logOut()); // Dispatching the correct action
+    dispatch(logOut());
   }
 
   function sendToProfile() {

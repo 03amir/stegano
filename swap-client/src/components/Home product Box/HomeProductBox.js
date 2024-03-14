@@ -19,7 +19,7 @@ function HomeProductBox({ category, heading }) {
     try {
 
       const url = `${process.env.REACT_APP_BASE_URL}/products/${category}`;
-       const res = await axios.get(url);
+      const res = await axios.get(url);
 
       setBoxProducts(res.data.data.reverse());
       setIsFetched(true);

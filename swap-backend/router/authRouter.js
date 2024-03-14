@@ -1,13 +1,11 @@
 const express = require("express");
-
 const router = express.Router();
-
-const {addUser, allUser,deletealluser} = require("../controllers/authController")
+const { addUser, checkAuth, updateUser } = require("../controllers/authController");
+const verify = require("../middlewares/verify");
 
 router.route("/signIn").post(addUser);
+router.route("/updateUser").put(verify, updateUser)
+router.route("/isAuthentic").post(checkAuth);
 
-router.route("/alluser").get(allUser);
-
-router.route("/deletealluser").get(deletealluser);
 
 module.exports = router;
