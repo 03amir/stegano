@@ -21,6 +21,7 @@ function AddProduct() {
 
   const [image, setImage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
     if (!user) {
@@ -59,8 +60,6 @@ function AddProduct() {
 
       alert("Product added successfully. Go to the home page.");
 
-
-
       navigate("/");
     } catch (error) {
       console.error("Error adding product:", error);
@@ -68,11 +67,13 @@ function AddProduct() {
     }
   }
 
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       if (file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png") {
         setImage(file);
+        setImagePreview(URL.createObjectURL(file)); 
       } else {
         alert("Please select a valid image format (jpg, jpeg, or png).");
       }
@@ -187,10 +188,16 @@ function AddProduct() {
           </div>
 
           <div className="imageBox">
-            <label htmlFor="file">Upload Image</label>
-            <input type="file" id="file" onChange={(e) => handleImageChange(e)} />
+            <label htmlFor="file" className="custom-file-upload">
+              Upload Image
+            </label>
+            <input type="file" id="file" onChange={(e) => handleImageChange(e)} style={{ display: 'none' }} />
+            {imagePreview && <div className="preview-box"> <img src={imagePreview} alt="Preview" className="image-preview" /> </div> }
           </div>
+          
         </div>
+
+
 
         <div className="descBox">
           <label htmlFor="description">Description</label>
