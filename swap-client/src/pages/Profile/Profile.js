@@ -77,7 +77,7 @@ export default function Profile() {
                 <button
                   className="addBtn"
                   onClick={() => {
-                    navigate("/products/addproduct");
+                    navigate("/addproduct");
                   }}
                 >
                   Add Product

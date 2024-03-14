@@ -37,7 +37,7 @@ function Home(props) {
             <button
               className="sellButton"
               onClick={() => {
-                navigate("/products/addproduct");
+                navigate("/addproduct");
               }}
             >
               Swap Now!
