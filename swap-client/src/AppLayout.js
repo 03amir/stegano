@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Contact from "./pages/Contact/Contact.js";
 import { checkAuthAsync } from "./redux/userSlice";
+import ErrorBoundary from "./error/ErrorHandler.js";
 
 function AppLayout(props) {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function AppLayout(props) {
 
   return (
     <BrowserRouter>
+      <ErrorBoundary>
       <Navbar />
       <Routes>
         
@@ -43,6 +45,7 @@ function AppLayout(props) {
 
       </Routes>
       <Footer />
+      </ErrorBoundary>
     </BrowserRouter>
   );
 }

@@ -42,6 +42,20 @@
 
 }
 
+.update-user-button{
+    padding: 8px 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.update-user-button:hover{
+      background-color: #3f6745;
+       border: 1px solid white;
+       color: white;
+
+}
+
 
 .lowerBox{
     width: 60%;

@@ -117,9 +117,7 @@ function AddProduct() {
                 setFormDetails({ ...formDetails, tag: e.target.value });
               }}
             >
-              <option value="" disabled selected>
-                Select your option
-              </option>
+              <option value="" disabled>Select your option</option>
               <option value="book">Book</option>
               <option value="cycle">Cycle</option>
               <option value="fan">Fan</option>

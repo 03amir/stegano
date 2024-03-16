@@ -52,6 +52,7 @@ export default function Profile() {
               <h1>{userdata?.name}</h1>
               <h2>{userdata?.email}</h2>
               <button
+               className="update-user-button"
                 onClick={() => {
                   setIsUpdating(true);
                 }}
